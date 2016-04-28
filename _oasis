@@ -1,0 +1,18 @@
+OASISFormat: 0.4
+Name:        commonjs_of_ocaml
+Version:     0.1
+Synopsis:    Import and export CommonJS modules in js_of_ocaml
+Authors:     Tony Aldridgew <tony@angry-lawyer.com>
+License:     MIT
+OCamlVersion: >= 4.02
+FilesAB:      lib/META.ab
+
+PreInstallCommand:   $ocamlfind install commonjs_ppx lib/ppx/META
+PreUninstallCommand: $ocamlfind remove commonjs_ppx
+
+Executable commonjs_ppx
+  Path:       lib/ppx
+  BuildDepends: compiler-libs.commin
+  BuildTools: ocamlbuild
+  MainIs:     ppx.ml
+  CompiledObject: best
