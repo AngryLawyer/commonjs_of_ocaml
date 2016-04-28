@@ -5,7 +5,7 @@ Synopsis:    Import and export CommonJS modules in js_of_ocaml
 Authors:     Tony Aldridgew <tony@angry-lawyer.com>
 License:     MIT
 OCamlVersion: >= 4.02
-FilesAB:      lib/META.ab
+FilesAB:      lib/ppx/META.ab
 
 PreInstallCommand:   $ocamlfind install commonjs_ppx lib/ppx/META
 PreUninstallCommand: $ocamlfind remove commonjs_ppx

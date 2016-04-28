@@ -5,13 +5,13 @@ open Parsetree
 open Longident
 
 
-let getenv_mapper argv =
+let require_mapper argv =
   { default_mapper with
     expr = fun mapper expr ->
       match expr with
-      | [%expr [%require [%e str]]] ->
+      | [%expr [%require [%e? str]]] ->
           let args = [] in
-          Exp.apply ~loc (Exp.ident {txt = Longident.parse "ReactJS.create_element"; loc=expr.pexp.loc}) args
+          Exp.apply ~loc:expr.pexp_loc (Exp.ident {txt = Longident.parse "ReactJS.create_element"; loc=expr.pexp_loc}) args
       | x -> default_mapper.expr mapper x;
   }
 
