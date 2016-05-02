@@ -2,7 +2,10 @@ OASISFormat: 0.4
 Name:        commonjs_of_ocaml
 Version:     0.1
 Synopsis:    Import and export CommonJS modules in js_of_ocaml
-Authors:     Tony Aldridgew <tony@angry-lawyer.com>
+Description: Helper PPX and functions for ease of interfacing with other CommonJS modules when building a project through js_of_ocaml
+Authors:     Tony Aldridge <tony@angry-lawyer.com>
+Maintainers: Tony Aldridge <tony@angry-lawyer.com>
+Homepage:    https://github.com/angrylawyer/commonjs_of_ocaml
 License:     MIT
 OCamlVersion: >= 4.02
 FilesAB:      lib/ppx/META.ab
