@@ -1,2 +1,2 @@
 version = "$(pkg_version)"
-ppx = "reactjs_ppx"
+ppx = "commonjs_ppx"
