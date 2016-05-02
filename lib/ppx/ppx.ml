@@ -17,25 +17,37 @@ let require_mapper argv =
   { default_mapper with
     expr = fun mapper expr ->
       match expr with
-      | [%expr [%require [%e? str]]] ->
-          begin 
-              match str with
-              | { pexp_desc = Pexp_constant (Const_string (s, None)) } ->
-                  let args = make_args (make_require_string s) in
-                  make_apply expr.pexp_loc args
-              | _ ->
+      | { pexp_desc = Pexp_extension ({ txt = "require"; loc }, pstr)} ->
+        begin
+            match pstr with
+            | PStr [{
+                pstr_desc = Pstr_eval({
+                    pexp_loc = loc; pexp_desc = Pexp_constant (Const_string (s, None))
+                }, _)
+            }] ->
+                let args = make_args (make_require_string s) in
+                make_apply expr.pexp_loc args
+            | _ ->
                 raise (Location.Error (
                     Location.error ~loc:expr.pexp_loc "[%require] expected a constant string"))
-          end
-      | [%expr [%require_or_default [%e? str] [%e? fallback]]] ->
-          begin
-              match str, fallback with
-              | { pexp_desc = Pexp_constant (Const_string (s, None)) }, { pexp_desc = Pexp_constant (Const_string (fb, None)) } ->
-                  let loc = expr.pexp_loc in
-                  let args = make_args (make_require_string s) in
-                  let otherwise = make_args fb in
-                  Exp.try_ ~loc (make_apply loc args) [Exp.case (Pat.any ~loc ()) (make_apply loc otherwise)]
-              | _ ->
+        end
+      | { pexp_desc = Pexp_extension ({ txt = "require_or_default"; loc }, pstr)} ->
+        begin
+            match pstr with
+            | PStr [{
+                pstr_desc = Pstr_eval({
+                    pexp_loc = loc; pexp_desc = Pexp_constant (Const_string (s, None))
+                }, _)
+            }, {
+                pstr_desc = Pstr_eval({
+                    pexp_loc = loc; pexp_desc = Pexp_constant (Const_string (fb, None))
+                }, _)
+            }] ->
+                let loc = expr.pexp_loc in
+                let args = make_args (make_require_string s) in
+                let otherwise = make_args fb in
+                Exp.try_ ~loc (make_apply loc args) [Exp.case (Pat.any ~loc ()) (make_apply loc otherwise)]
+            | _ ->
                 raise (Location.Error (
                     Location.error ~loc:expr.pexp_loc "[%require_or_default] expected constant strings"))
           end

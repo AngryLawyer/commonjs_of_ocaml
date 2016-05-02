@@ -15,7 +15,7 @@ PreUninstallCommand: $ocamlfind remove commonjs_ppx
 
 Executable commonjs_ppx
   Path:       lib/ppx
-  BuildDepends: compiler-libs.common,ppx_tools.metaquot,ppx_tools
+  BuildDepends: compiler-libs.common
   BuildTools: ocamlbuild
   MainIs:     ppx.ml
   CompiledObject: best
