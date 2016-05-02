@@ -36,11 +36,12 @@ let require_mapper argv =
             match pstr with
             | PStr [{
                 pstr_desc = Pstr_eval({
-                    pexp_loc = _; pexp_desc = Pexp_constant (Const_string (s, None))
-                }, _)
-            }; {
-                pstr_desc = Pstr_eval({
-                    pexp_loc = _; pexp_desc = Pexp_constant (Const_string (fb, None))
+                    pexp_loc = _; pexp_desc = Pexp_apply (
+                        {pexp_desc = Pexp_constant (Const_string (s, None))},
+                        [("", {
+                            pexp_desc = Pexp_constant (Const_string (fb, None))
+                        })]
+                    )
                 }, _)
             }] ->
                 let loc = expr.pexp_loc in
