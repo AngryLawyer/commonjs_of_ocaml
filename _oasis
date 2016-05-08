@@ -23,7 +23,7 @@ Executable commonjs_ppx
 Library commonjs
   Path:           lib
   Modules:        CommonJS
-  BuildDepends:   js_of_ocaml, js_of_ocaml.ppx
+  BuildDepends:   js_of_ocaml (>= 2.6), js_of_ocaml.ppx (>= 2.6)
   BuildTools:     ocamlbuild
   CompiledObject: best
 
