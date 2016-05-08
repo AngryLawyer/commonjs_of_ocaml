@@ -1,6 +1,6 @@
 {
   "name": "commonjs_of_ocaml_test",
   "scripts": {
-    "test": "[ $(node main.js) = 10 ]"
+    "test": "[ $(node main.js) = 17 ]"
   }
 }
