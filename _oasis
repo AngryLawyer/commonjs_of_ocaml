@@ -35,6 +35,7 @@ Test test_commonjs
     -cflags '-ppx $commonjs_ppx' \ 
     test/ocaml_required.byte \
     && js_of_ocaml _build/test/ocaml_required.byte \
+    && mv _build/test/ocaml_required.js test \
     && cd test \
     && npm test
   TestTools: commonjs_ppx
