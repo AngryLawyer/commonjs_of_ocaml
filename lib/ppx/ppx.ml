@@ -38,16 +38,13 @@ let require_mapper argv =
                 pstr_desc = Pstr_eval({
                     pexp_loc = _; pexp_desc = Pexp_apply (
                         {pexp_desc = Pexp_constant (Const_string (s, None))},
-                        [("", {
-                            pexp_desc = Pexp_constant (Const_string (fb, None))
-                        })]
+                        [("", fallback)]
                     )
                 }, _)
             }] ->
                 let loc = expr.pexp_loc in
                 let args = make_args (make_require_string s) in
-                let otherwise = make_args fb in
-                Exp.try_ ~loc (make_apply loc args) [Exp.case (Pat.any ~loc ()) (make_apply loc otherwise)]
+                Exp.try_ ~loc (make_apply loc args) [Exp.case (Pat.any ~loc ()) fallback]
             | _ ->
                 raise (Location.Error (
                     Location.error ~loc:expr.pexp_loc "[%require_or_default] expected constant strings"))
