@@ -39,3 +39,8 @@ Test test_commonjs
     && cd test \
     && npm test
   TestTools: commonjs_ppx
+
+SourceRepository master
+  Type:     git
+  Location: https://github.com/angrylawyer/commonjs_of_ocaml.git
+  Browser:  https://github.com/angrylawyer/commonjs_of_ocaml

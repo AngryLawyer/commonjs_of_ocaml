@@ -5,6 +5,7 @@ maintainer: "Tony Aldridge <tony@angry-lawyer.com>"
 authors: [ "Tony Aldridge <tony@angry-lawyer.com>" ]
 license: "MIT"
 homepage: "https://github.com/angrylawyer/commonjs_of_ocaml"
+dev-repo: "https://github.com/angrylawyer/commonjs_of_ocaml.git"
 bug-reports: "https://github.com/angrylawyer/commonjs_of_ocaml/issues"
 build: [
   ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
