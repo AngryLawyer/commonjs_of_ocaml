@@ -1,6 +1,6 @@
 OASISFormat: 0.4
 Name:        commonjs_of_ocaml
-Version:     0.1
+Version:     0.1.0
 Synopsis:    Import and export CommonJS modules in js_of_ocaml
 Description: Helper PPX and functions for ease of interfacing with other CommonJS modules when building a project through js_of_ocaml
 Authors:     Tony Aldridge <tony@angry-lawyer.com>
