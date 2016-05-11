@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 9b8ba15665bef361f0dd978a4176174b)
+version = "0.1.0"
+description = "Import and export CommonJS modules in js_of_ocaml"
+requires = "js_of_ocaml js_of_ocaml.ppx"
+archive(byte) = "commonjs.cma"
+archive(byte, plugin) = "commonjs.cma"
+archive(native) = "commonjs.cmxa"
+archive(native, plugin) = "commonjs.cmxs"
+exists_if = "commonjs.cma"
+# OASIS_STOP
+

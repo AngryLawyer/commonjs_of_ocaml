@@ -7,6 +7,7 @@ Authors:     Tony Aldridge <tony@angry-lawyer.com>
 Maintainers: Tony Aldridge <tony@angry-lawyer.com>
 Homepage:    https://github.com/angrylawyer/commonjs_of_ocaml
 License:     MIT
+Plugins:     META (0.4)
 OCamlVersion: >= 4.02.0
 FilesAB:      lib/ppx/META.ab
 
