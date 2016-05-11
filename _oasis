@@ -7,7 +7,7 @@ Authors:     Tony Aldridge <tony@angry-lawyer.com>
 Maintainers: Tony Aldridge <tony@angry-lawyer.com>
 Homepage:    https://github.com/angrylawyer/commonjs_of_ocaml
 License:     MIT
-OCamlVersion: >= 4.02
+OCamlVersion: >= 4.02.0
 FilesAB:      lib/ppx/META.ab
 
 PreInstallCommand:   $ocamlfind install commonjs_ppx lib/ppx/META
@@ -23,7 +23,7 @@ Executable commonjs_ppx
 Library commonjs
   Path:           lib
   Modules:        CommonJS
-  BuildDepends:   js_of_ocaml (>= 2.6), js_of_ocaml.ppx (>= 2.6)
+  BuildDepends:   js_of_ocaml (>= 2.7), js_of_ocaml.ppx
   BuildTools:     ocamlbuild
   CompiledObject: best
 
@@ -32,7 +32,7 @@ Test test_commonjs
   Command: ocamlbuild -use-ocamlfind \
     -I lib \
     -package js_of_ocaml,js_of_ocaml.ppx \
-    -cflags '-ppx $commonjs_ppx' \ 
+    -cflags '-ppx $commonjs_ppx' \
     test/ocaml_required.byte \
     && js_of_ocaml _build/test/ocaml_required.byte \
     && mv _build/test/ocaml_required.js test \

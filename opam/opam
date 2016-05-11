@@ -22,7 +22,7 @@ build-test: [
   ["ocaml" "setup.ml" "-test"]
 ]
 depends: [
-  "js_of_ocaml" {>= "2.6"}
+  "js_of_ocaml" {>= "2.7"}
   "ocamlfind" {build}
 ]
-available: [ ocaml-version >= "4.02" ]
+available: [ ocaml-version >= "4.02.0" ]
