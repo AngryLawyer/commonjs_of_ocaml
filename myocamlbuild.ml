@@ -622,4 +622,9 @@ let dispatch_default = MyOCamlbuildBase.dispatch_default conf package_default;;
 (* OASIS_STOP *)
 Ocamlbuild_plugin.dispatch (fun hook ->
     Ocamlbuild_cppo.dispatcher hook;
-)
+    hook |> function
+        | After_rules ->
+            let major, minor, patch = Scanf.sscanf Sys.ocaml_version "%i.%i.%i" (fun a b c -> a, b, c) in
+            let output = Printf.sprintf "(%i,%i,%i)" major minor patch  in
+            flag ["cppo"] & S[A"-D"; A("OCAML_VERSION " ^ output)];
+    | _ -> ())

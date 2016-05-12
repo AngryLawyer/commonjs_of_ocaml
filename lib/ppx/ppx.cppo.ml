@@ -4,11 +4,17 @@ open Asttypes
 open Parsetree
 open Longident
 
+#if OCAML_VERSION < (4, 03, 0)
+  let nolabel = ""
+#else
+  let nolabel = Nolabel
+#endif
+
 let make_require_string str =
     Printf.sprintf "require('%s')" str
 
 let make_args str =
-    [("", (Exp.constant (Const_string (str, None))))]
+    [(nolabel, (Exp.constant (Const_string (str, None))))]
 
 let make_apply loc args =
   Exp.apply ~loc:loc (Exp.ident {txt = Longident.parse "Js.Unsafe.js_expr"; loc=loc}) args
@@ -38,7 +44,7 @@ let require_mapper argv =
                 pstr_desc = Pstr_eval({
                     pexp_loc = _; pexp_desc = Pexp_apply (
                         {pexp_desc = Pexp_constant (Const_string (s, None))},
-                        [("", fallback)]
+                        [(nolabel, fallback)]
                     )
                 }, _)
             }] ->
