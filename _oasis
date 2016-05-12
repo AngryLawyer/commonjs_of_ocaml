@@ -9,6 +9,8 @@ Homepage:    https://github.com/angrylawyer/commonjs_of_ocaml
 License:     MIT
 Plugins:     META (0.4)
 OCamlVersion: >= 4.02.0
+AlphaFeatures: ocamlbuild_more_args
+XOCamlbuildPluginTags: package(cppo_ocamlbuild)
 FilesAB:      lib/ppx/META.ab
 
 PreInstallCommand:   $ocamlfind install commonjs_ppx lib/ppx/META
