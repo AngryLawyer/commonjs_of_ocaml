@@ -14,6 +14,7 @@ export OPAMYES=1
 opam init
 
 if [ $OCAML_VERSION = "4.03.0" ]; then
+    opam switch --all
     opam switch set 4.03.0+trunk
 fi
 
