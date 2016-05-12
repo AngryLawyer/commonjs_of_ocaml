@@ -3,3 +3,4 @@ script: bash -ex .travis-ci.sh
 sudo: required
 env:
   - OCAML_VERSION=4.02.3 OPAM_VERSION=1.2.2
+  - OCAML_VERSION=4.03.0 OPAM_VERSION=1.2.2
