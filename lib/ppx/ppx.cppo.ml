@@ -11,7 +11,7 @@ open Longident
 #else
   let nolabel = Nolabel
   let const_string x y =
-    PConst_string (x, y)
+    Pconst_string (x, y)
 #endif
 
 let make_require_string str =
