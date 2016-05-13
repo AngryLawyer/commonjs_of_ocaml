@@ -6,15 +6,19 @@ open Longident
 
 #if OCAML_VERSION < (4, 03, 0)
   let nolabel = ""
+  let const_string x y =
+    Const_string (x, y)
 #else
   let nolabel = Nolabel
+  let const_string x y =
+    PConst_string (x, y)
 #endif
 
 let make_require_string str =
     Printf.sprintf "require('%s')" str
 
 let make_args str =
-    [(nolabel, (Exp.constant (Const_string (str, None))))]
+    [(nolabel, (Exp.constant (const_string str None)))]
 
 let make_apply loc args =
   Exp.apply ~loc:loc (Exp.ident {txt = Longident.parse "Js.Unsafe.js_expr"; loc=loc}) args
