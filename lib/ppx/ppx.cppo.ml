@@ -4,11 +4,21 @@ open Asttypes
 open Parsetree
 open Longident
 
+#if OCAML_VERSION < (4, 03, 0)
+  let nolabel = ""
+  let const_string x y =
+    Const_string (x, y)
+#else
+  let nolabel = Nolabel
+  let const_string x y =
+    Pconst_string (x, y)
+#endif
+
 let make_require_string str =
     Printf.sprintf "require('%s')" str
 
 let make_args str =
-    [("", (Exp.constant (Const_string (str, None))))]
+    [(nolabel, (Exp.constant (const_string str None)))]
 
 let make_apply loc args =
   Exp.apply ~loc:loc (Exp.ident {txt = Longident.parse "Js.Unsafe.js_expr"; loc=loc}) args
@@ -22,7 +32,11 @@ let require_mapper argv =
             match pstr with
             | PStr [{
                 pstr_desc = Pstr_eval({
+                    #if OCAML_VERSION < (4, 03, 0)
                     pexp_loc = loc; pexp_desc = Pexp_constant (Const_string (s, None))
+                    #else
+                    pexp_loc = loc; pexp_desc = Pexp_constant (Pconst_string (s, None))
+                    #endif
                 }, _)
             }] ->
                 let args = make_args (make_require_string s) in
@@ -37,8 +51,12 @@ let require_mapper argv =
             | PStr [{
                 pstr_desc = Pstr_eval({
                     pexp_loc = _; pexp_desc = Pexp_apply (
+                        #if OCAML_VERSION < (4, 03, 0)
                         {pexp_desc = Pexp_constant (Const_string (s, None))},
-                        [("", fallback)]
+                        #else
+                        {pexp_desc = Pexp_constant (Pconst_string (s, None))},
+                        #endif
+                        [(nolabel, fallback)]
                     )
                 }, _)
             }] ->
