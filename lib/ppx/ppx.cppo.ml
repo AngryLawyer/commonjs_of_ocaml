@@ -32,7 +32,11 @@ let require_mapper argv =
             match pstr with
             | PStr [{
                 pstr_desc = Pstr_eval({
+                    #if OCAML_VERSION < (4, 03, 0)
                     pexp_loc = loc; pexp_desc = Pexp_constant (Const_string (s, None))
+                    #else
+                    pexp_loc = loc; pexp_desc = Pexp_constant (Pconst_string (s, None))
+                    #endif
                 }, _)
             }] ->
                 let args = make_args (make_require_string s) in
@@ -47,7 +51,11 @@ let require_mapper argv =
             | PStr [{
                 pstr_desc = Pstr_eval({
                     pexp_loc = _; pexp_desc = Pexp_apply (
+                        #if OCAML_VERSION < (4, 03, 0)
                         {pexp_desc = Pexp_constant (Const_string (s, None))},
+                        #else
+                        {pexp_desc = Pexp_constant (Pconst_string (s, None))},
+                        #endif
                         [(nolabel, fallback)]
                     )
                 }, _)
