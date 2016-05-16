@@ -26,13 +26,13 @@ Include ```commonjs``` and ```commonjs_ppx``` in your ```-packages``` switch wit
 You can require ```commonjs``` compliant Javascript packages into your OCaml files as follows:
 
 ```ocaml
-let module = [%require "./my_module"]
+let my_module = [%require "./my_module"]
 ```
 
 Alternatively, if you're working in a situation where you want to provide a fallback if a ```commonjs``` loader is not available, or a module is not available:
 
 ```ocaml
-let module = [%require_or_default "./my_module" my_fallback_variable]
+let my_module = [%require_or_default "./my_module" my_fallback_variable]
 ```
 
 This, internally, wraps a try block around the require statement, and is useful for libraries where users may be attaching their modules directly to the DOM window where they're not using a ```commonjs``` loader.
